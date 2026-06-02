@@ -1,0 +1,34 @@
+.wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bar {
+  width: 4px;
+  height: 28px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.healthy {
+  background: var(--gg-success);
+}
+
+.low {
+  background: var(--gg-warning);
+}
+
+.out {
+  background: var(--gg-danger);
+}
+
+.text {
+  font-size: 13px;
+  color: var(--gg-text-primary);
+}
+
+.text strong {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}

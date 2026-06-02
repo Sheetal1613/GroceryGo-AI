@@ -1,0 +1,71 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 20px;
+  border: 1px solid var(--gg-border);
+  border-radius: var(--gg-radius-lg);
+  background: var(--gg-bg-surface);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  color: var(--gg-text-primary);
+}
+
+.title {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.viewport {
+  flex: 1;
+  min-height: 160px;
+  border-radius: var(--gg-radius-md);
+  background: var(--gg-bg-app);
+  overflow: hidden;
+}
+
+.frame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 160px;
+  border: 2px dashed var(--gg-border);
+  border-radius: var(--gg-radius-md);
+  background: repeating-linear-gradient(
+    45deg,
+    var(--gg-border-subtle),
+    var(--gg-border-subtle) 10px,
+    var(--gg-bg-app) 10px,
+    var(--gg-bg-app) 20px
+  );
+}
+
+.placeholderIcon {
+  color: var(--gg-text-tertiary);
+  opacity: 0.5;
+}
+
+.placeholderText {
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: var(--gg-text-tertiary);
+}
+
+.note {
+  margin: 16px 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--gg-text-secondary);
+}
+
+.btn {
+  width: 100%;
+}

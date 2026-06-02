@@ -1,0 +1,13 @@
+.card {
+  padding: 32px;
+  border: 1px dashed var(--gg-border);
+  border-radius: var(--gg-radius-lg);
+  background: var(--gg-bg-surface);
+  text-align: center;
+}
+
+.message {
+  margin: 0;
+  font-size: 14px;
+  color: var(--gg-text-secondary);
+}

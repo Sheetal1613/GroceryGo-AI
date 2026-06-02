@@ -1,0 +1,52 @@
+.card {
+  border: 1px solid var(--gg-border);
+  border-radius: var(--gg-radius-lg);
+  background: var(--gg-bg-surface);
+  box-shadow: var(--gg-shadow-sm);
+}
+
+.none {
+  padding: 0;
+}
+
+.sm {
+  padding: 12px;
+}
+
+.md {
+  padding: 20px;
+}
+
+.lg {
+  padding: 24px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.headerText {
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gg-text-primary);
+  letter-spacing: -0.01em;
+}
+
+.description {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--gg-text-secondary);
+}
+
+.headerAction {
+  flex-shrink: 0;
+}

@@ -1,0 +1,121 @@
+.card {
+  height: 100%;
+}
+
+.inner {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--gg-radius-md);
+  flex-shrink: 0;
+}
+
+.accent {
+  background: var(--gg-accent-muted);
+  color: var(--gg-accent);
+}
+
+.success {
+  background: rgba(48, 164, 108, 0.12);
+  color: var(--gg-success);
+}
+
+.warning {
+  background: rgba(245, 166, 35, 0.12);
+  color: var(--gg-warning);
+}
+
+.danger {
+  background: rgba(229, 72, 77, 0.12);
+  color: var(--gg-danger);
+}
+
+.neutral {
+  background: var(--gg-border-subtle);
+  color: var(--gg-text-secondary);
+}
+
+.content {
+  min-width: 0;
+  flex: 1;
+}
+
+.label {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gg-text-secondary);
+}
+
+.value {
+  margin: 4px 0 0;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--gg-text-primary);
+  line-height: 1.2;
+}
+
+.trend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gg-text-tertiary);
+}
+
+.trendUp {
+  color: var(--gg-success);
+}
+
+.trendDown {
+  color: var(--gg-danger);
+}
+
+.trendLabel {
+  color: var(--gg-text-tertiary);
+  font-weight: 400;
+}
+
+.loadingInner {
+  display: flex;
+  gap: 16px;
+}
+
+.loadingText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeletonIcon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+.skeletonTitle {
+  width: 60%;
+  height: 14px;
+}
+
+.skeletonValue {
+  width: 45%;
+  height: 28px;
+}
+
+.skeletonTrend {
+  width: 50%;
+  height: 12px;
+}

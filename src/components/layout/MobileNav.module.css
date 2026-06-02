@@ -1,0 +1,68 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+}
+
+@media (min-width: 1024px) {
+  .root {
+    display: none;
+  }
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  border: none;
+  background: var(--gg-overlay);
+  cursor: pointer;
+  animation: fadeIn 0.2s ease;
+}
+
+.drawer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(300px, 85vw);
+  max-width: 100%;
+  height: 100%;
+  background: var(--gg-bg-sidebar);
+  box-shadow: var(--gg-shadow-lg);
+  animation: slideIn 0.25s ease;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.header .iconButton {
+  color: var(--gg-text-sidebar-muted);
+}
+
+.header .iconButton:hover {
+  background: var(--gg-bg-sidebar-hover);
+  color: var(--gg-text-sidebar);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

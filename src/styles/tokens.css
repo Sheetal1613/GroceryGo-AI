@@ -1,0 +1,79 @@
+/* GroceryGo design tokens — Linear-inspired SaaS shell */
+
+:root,
+[data-theme='light'] {
+  color-scheme: light;
+
+  --gg-font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --gg-font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --gg-radius-sm: 6px;
+  --gg-radius-md: 8px;
+  --gg-radius-lg: 12px;
+
+  --gg-sidebar-width: 260px;
+  --gg-sidebar-collapsed: 72px;
+  --gg-header-height: 56px;
+
+  --gg-bg-app: #f7f8fa;
+  --gg-bg-surface: #ffffff;
+  --gg-bg-elevated: #ffffff;
+  --gg-bg-sidebar: #111318;
+  --gg-bg-sidebar-hover: rgba(255, 255, 255, 0.06);
+  --gg-bg-sidebar-active: rgba(255, 255, 255, 0.1);
+
+  --gg-text-primary: #0f1117;
+  --gg-text-secondary: #5c6370;
+  --gg-text-tertiary: #8b939e;
+  --gg-text-sidebar: #e8eaed;
+  --gg-text-sidebar-muted: #9aa0ab;
+
+  --gg-border: #e4e6eb;
+  --gg-border-subtle: #eef0f3;
+
+  --gg-accent: #5e6ad2;
+  --gg-accent-hover: #4f5bc4;
+  --gg-accent-muted: rgba(94, 106, 210, 0.12);
+
+  --gg-success: #30a46c;
+  --gg-warning: #f5a623;
+  --gg-danger: #e5484d;
+
+  --gg-shadow-sm: 0 1px 2px rgba(15, 17, 23, 0.06);
+  --gg-shadow-md: 0 4px 12px rgba(15, 17, 23, 0.08);
+  --gg-shadow-lg: 0 12px 40px rgba(15, 17, 23, 0.12);
+
+  --gg-overlay: rgba(15, 17, 23, 0.4);
+  --gg-focus-ring: 0 0 0 2px var(--gg-bg-app), 0 0 0 4px var(--gg-accent);
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --gg-bg-app: #0c0d10;
+  --gg-bg-surface: #15171c;
+  --gg-bg-elevated: #1a1d24;
+  --gg-bg-sidebar: #0a0b0e;
+  --gg-bg-sidebar-hover: rgba(255, 255, 255, 0.05);
+  --gg-bg-sidebar-active: rgba(255, 255, 255, 0.09);
+
+  --gg-text-primary: #f0f1f3;
+  --gg-text-secondary: #9aa0ab;
+  --gg-text-tertiary: #6b7280;
+  --gg-text-sidebar: #e8eaed;
+  --gg-text-sidebar-muted: #7a8190;
+
+  --gg-border: #262a33;
+  --gg-border-subtle: #1e2128;
+
+  --gg-accent: #7c85e6;
+  --gg-accent-hover: #8f97eb;
+  --gg-accent-muted: rgba(124, 133, 230, 0.15);
+
+  --gg-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --gg-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --gg-shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5);
+
+  --gg-overlay: rgba(0, 0, 0, 0.6);
+  --gg-focus-ring: 0 0 0 2px var(--gg-bg-app), 0 0 0 4px var(--gg-accent);
+}

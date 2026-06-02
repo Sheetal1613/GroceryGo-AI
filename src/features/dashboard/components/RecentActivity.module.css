@@ -1,0 +1,142 @@
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--gg-border-subtle);
+}
+
+.item:first-child {
+  padding-top: 0;
+}
+
+.item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--gg-radius-md);
+  flex-shrink: 0;
+}
+
+.toneReceipt {
+  background: var(--gg-accent-muted);
+  color: var(--gg-accent);
+}
+
+.toneInventory {
+  background: rgba(48, 164, 108, 0.12);
+  color: var(--gg-success);
+}
+
+.toneList {
+  background: rgba(245, 166, 35, 0.12);
+  color: var(--gg-warning);
+}
+
+.toneAlert {
+  background: rgba(229, 72, 77, 0.12);
+  color: var(--gg-danger);
+}
+
+.toneAi {
+  background: rgba(124, 133, 230, 0.15);
+  color: var(--gg-accent);
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gg-text-primary);
+}
+
+.description {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: var(--gg-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.time {
+  flex-shrink: 0;
+  font-size: 11px;
+  color: var(--gg-text-tertiary);
+  white-space: nowrap;
+}
+
+.viewAll {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gg-accent);
+}
+
+.viewAll:hover {
+  color: var(--gg-accent-hover);
+}
+
+.emptyLink {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gg-accent);
+}
+
+.emptyLink:hover {
+  color: var(--gg-accent-hover);
+}
+
+.skeletonRow {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+.skeletonIcon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.skeletonText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeletonSub {
+  width: 70%;
+}
+
+@media (max-width: 640px) {
+  .time {
+    display: none;
+  }
+
+  .item {
+    flex-wrap: wrap;
+  }
+
+  .content {
+    width: calc(100% - 44px);
+  }
+}

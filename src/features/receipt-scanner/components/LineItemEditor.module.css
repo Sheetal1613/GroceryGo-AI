@@ -1,0 +1,223 @@
+.card {
+  overflow: hidden;
+}
+
+.metaSection {
+  padding: 20px 20px 0;
+}
+
+.metaFields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.table th {
+  padding: 10px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--gg-text-tertiary);
+  background: var(--gg-bg-app);
+  border-top: 1px solid var(--gg-border);
+  border-bottom: 1px solid var(--gg-border);
+}
+
+.table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--gg-border-subtle);
+  vertical-align: middle;
+}
+
+.numCol {
+  width: 100px;
+  text-align: right;
+}
+
+.table th.numCol {
+  text-align: right;
+}
+
+.actionCol {
+  width: 48px;
+}
+
+.cellInput {
+  width: 100%;
+  min-width: 140px;
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid var(--gg-border);
+  border-radius: var(--gg-radius-sm);
+  background: var(--gg-bg-surface);
+  font-size: 13px;
+  color: var(--gg-text-primary);
+}
+
+.cellInput:focus {
+  outline: none;
+  border-color: var(--gg-accent);
+  box-shadow: var(--gg-focus-ring);
+}
+
+.cellSelect {
+  width: 100%;
+  min-width: 120px;
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid var(--gg-border);
+  border-radius: var(--gg-radius-sm);
+  background: var(--gg-bg-surface);
+  font-size: 12px;
+  color: var(--gg-text-primary);
+}
+
+.cellInputNum {
+  width: 80px;
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid var(--gg-border);
+  border-radius: var(--gg-radius-sm);
+  background: var(--gg-bg-surface);
+  font-size: 13px;
+  text-align: right;
+  color: var(--gg-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.cellInputNum:focus,
+.cellSelect:focus {
+  outline: none;
+  border-color: var(--gg-accent);
+  box-shadow: var(--gg-focus-ring);
+}
+
+.lineTotal {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--gg-text-primary);
+}
+
+.deleteBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: var(--gg-radius-md);
+  background: transparent;
+  color: var(--gg-text-tertiary);
+  cursor: pointer;
+}
+
+.deleteBtn:hover {
+  background: rgba(229, 72, 77, 0.1);
+  color: var(--gg-danger);
+}
+
+.tableFooter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px 20px;
+  border-top: 1px solid var(--gg-border-subtle);
+}
+
+.totals {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  min-width: 180px;
+}
+
+.totals div {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  font-size: 13px;
+}
+
+.totals dt {
+  color: var(--gg-text-secondary);
+  font-weight: 500;
+}
+
+.totals dd {
+  margin: 0;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--gg-text-primary);
+}
+
+.totalRow {
+  padding-top: 8px;
+  margin-top: 4px;
+  border-top: 1px solid var(--gg-border);
+  font-size: 15px !important;
+}
+
+.totalRow dd {
+  color: var(--gg-accent);
+}
+
+.mobileList {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .tableWrap {
+    display: none;
+  }
+
+  .mobileList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 16px;
+  }
+
+  .mobileCard {
+    padding: 16px;
+    border: 1px solid var(--gg-border);
+    border-radius: var(--gg-radius-md);
+    background: var(--gg-bg-app);
+  }
+
+  .mobileRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .mobileFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--gg-border-subtle);
+  }
+
+  .metaFields {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,137 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1400px;
+}
+
+.analyticsGrid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 16px;
+}
+
+.bottomGrid {
+  display: grid;
+  grid-template-columns: 1fr 280px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.headerActionSkeleton {
+  width: 120px;
+  height: 36px;
+}
+
+.chartSkeletonCard {
+  height: 360px;
+  border-radius: var(--gg-radius-lg);
+  border: 1px solid var(--gg-border);
+  background: linear-gradient(
+    90deg,
+    var(--gg-border-subtle) 0%,
+    var(--gg-border) 50%,
+    var(--gg-border-subtle) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+.feedSkeletonCard {
+  min-height: 380px;
+  border-radius: var(--gg-radius-lg);
+  border: 1px solid var(--gg-border);
+  background: linear-gradient(
+    90deg,
+    var(--gg-border-subtle) 0%,
+    var(--gg-border) 50%,
+    var(--gg-border-subtle) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+@media (max-width: 1200px) {
+  .bottomGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .bottomGrid > :nth-child(2) {
+    grid-column: 1 / -1;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .analyticsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .bottomGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .dashboard {
+    gap: 20px;
+  }
+}
+
+.errorCard {
+  padding: 32px;
+  border: 1px solid var(--gg-border);
+  border-radius: var(--gg-radius-lg);
+  background: var(--gg-bg-surface);
+  text-align: center;
+}
+
+.errorCard p {
+  margin: 0 0 16px;
+  color: var(--gg-text-secondary);
+}
+
+.retryBtn,
+.refreshBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid var(--gg-border);
+  border-radius: var(--gg-radius-md);
+  background: var(--gg-bg-surface);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gg-text-primary);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.retryBtn:hover,
+.refreshBtn:hover {
+  background: var(--gg-border-subtle);
+  border-color: var(--gg-text-tertiary);
+}
+
+.footerNote {
+  margin: 0;
+  font-size: 12px;
+  color: var(--gg-text-tertiary);
+}
+
+.footerNote a {
+  color: var(--gg-accent);
+  font-weight: 500;
+}
+
+.footerNote a:hover {
+  color: var(--gg-accent-hover);
+}
