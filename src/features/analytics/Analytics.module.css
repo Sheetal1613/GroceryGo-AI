@@ -1,0 +1,62 @@
+.analytics {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1400px;
+}
+
+.contentArea {
+  min-height: 120px;
+  border: 1px dashed var(--gg-border);
+  border-radius: var(--gg-radius-md);
+  background: var(--gg-border-subtle);
+}
+
+.overviewContent {
+  min-height: 140px;
+}
+
+.chartContent {
+  min-height: 320px;
+}
+
+.panelContent {
+  min-height: 280px;
+}
+
+.insightsContent {
+  min-height: 200px;
+}
+
+.trendsGrid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 16px;
+}
+
+.dualGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .trendsGrid,
+  .dualGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .analytics {
+    gap: 20px;
+  }
+
+  .chartContent {
+    min-height: 260px;
+  }
+
+  .panelContent {
+    min-height: 240px;
+  }
+}
