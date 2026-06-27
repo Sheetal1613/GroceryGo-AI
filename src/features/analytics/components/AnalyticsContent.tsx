@@ -1,4 +1,5 @@
 import { PageHeader } from '@/components/layout/PageHeader'
+import { AnalyticsOverviewKpis } from './AnalyticsOverviewKpis'
 import { AnalyticsSection } from './AnalyticsSection'
 import styles from '../Analytics.module.css'
 
@@ -14,7 +15,9 @@ export function AnalyticsContent() {
         title="Overview"
         description="High-level summary of your grocery activity and key metrics."
         contentClassName={styles.overviewContent}
-      />
+      >
+        <AnalyticsOverviewKpis />
+      </AnalyticsSection>
 
       <section className={styles.trendsGrid} aria-label="Spending and categories">
         <AnalyticsSection

@@ -13,7 +13,10 @@
 }
 
 .overviewContent {
-  min-height: 140px;
+  min-height: auto;
+  padding: 0;
+  border: none;
+  background: transparent;
 }
 
 .chartContent {
