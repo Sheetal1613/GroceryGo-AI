@@ -23,6 +23,13 @@
   min-height: 320px;
 }
 
+.spendingTrendsContent {
+  min-height: auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
 .panelContent {
   min-height: 280px;
 }

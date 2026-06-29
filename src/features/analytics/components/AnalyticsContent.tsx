@@ -1,6 +1,7 @@
 import { PageHeader } from '@/components/layout/PageHeader'
 import { AnalyticsOverviewKpis } from './AnalyticsOverviewKpis'
 import { AnalyticsSection } from './AnalyticsSection'
+import { SpendingTrendsChart } from './SpendingTrendsChart'
 import styles from '../Analytics.module.css'
 
 export function AnalyticsContent() {
@@ -23,8 +24,10 @@ export function AnalyticsContent() {
         <AnalyticsSection
           title="Spending Trends"
           description="Monthly and weekly spending patterns over time."
-          contentClassName={styles.chartContent}
-        />
+          contentClassName={styles.spendingTrendsContent}
+        >
+          <SpendingTrendsChart />
+        </AnalyticsSection>
         <AnalyticsSection
           title="Category Breakdown"
           description="How your grocery budget is distributed across categories."
