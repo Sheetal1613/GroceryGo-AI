@@ -1,0 +1,151 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.card {
+  height: 100%;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--gg-shadow-md);
+  border-color: var(--gg-text-tertiary);
+}
+
+.inner {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--gg-radius-md);
+  flex-shrink: 0;
+}
+
+.success {
+  background: rgba(48, 164, 108, 0.12);
+  color: var(--gg-success);
+}
+
+.warning {
+  background: rgba(245, 166, 35, 0.12);
+  color: var(--gg-warning);
+}
+
+.danger {
+  background: rgba(229, 72, 77, 0.12);
+  color: var(--gg-danger);
+}
+
+.neutral {
+  background: var(--gg-border-subtle);
+  color: var(--gg-text-secondary);
+}
+
+.content {
+  min-width: 0;
+  flex: 1;
+}
+
+.label {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gg-text-secondary);
+}
+
+.count {
+  margin: 4px 0 0;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--gg-text-primary);
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.progressWrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.progressTrack {
+  flex: 1;
+  height: 6px;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.track_success {
+  background: rgba(48, 164, 108, 0.15);
+}
+
+.track_warning {
+  background: rgba(245, 166, 35, 0.15);
+}
+
+.track_danger {
+  background: rgba(229, 72, 77, 0.15);
+}
+
+.track_neutral {
+  background: var(--gg-border-subtle);
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.6s ease;
+}
+
+.fill_success {
+  background: var(--gg-success);
+}
+
+.fill_warning {
+  background: var(--gg-warning);
+}
+
+.fill_danger {
+  background: var(--gg-danger);
+}
+
+.fill_neutral {
+  background: var(--gg-text-tertiary);
+}
+
+.progressLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gg-text-secondary);
+  font-variant-numeric: tabular-nums;
+  min-width: 32px;
+  text-align: right;
+}
+
+.description {
+  margin: 10px 0 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--gg-text-tertiary);
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

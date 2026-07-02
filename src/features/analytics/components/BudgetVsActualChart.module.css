@@ -1,0 +1,16 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chartWrap {
+  width: 100%;
+  min-height: 260px;
+}
+
+@media (max-width: 640px) {
+  .chartWrap {
+    min-height: 220px;
+  }
+}

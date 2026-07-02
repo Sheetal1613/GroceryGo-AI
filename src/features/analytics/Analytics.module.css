@@ -12,7 +12,8 @@
   background: var(--gg-border-subtle);
 }
 
-.overviewContent {
+.overviewContent,
+.filledContent {
   min-height: auto;
   padding: 0;
   border: none;
