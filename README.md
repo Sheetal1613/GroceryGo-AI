@@ -50,11 +50,11 @@ Current implementation includes:
 
 ### Dashboard
 
-![Dashboard](docs/screenshots/dashboard.png)
+![Dashboard]()
 
 ### Inventory
 
-![Inventory](docs/screenshots/inventory.png)
+![Inventory]()
 
 ### Receipt Scanner
 
