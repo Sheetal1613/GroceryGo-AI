@@ -1,194 +1,320 @@
-# GroceryGo AI
+# 🛒 GroceryGo AI
 
-GroceryGo AI is a modern SaaS-style grocery operations platform that helps households manage inventory, scan receipts, track spending, and make smarter shopping decisions with AI-assisted workflows.
+A modern full-stack grocery inventory and expense management platform that helps users organize pantry items, monitor expiry dates, manage shopping lists, analyze grocery spending, and leverage AI-powered features to reduce food waste and shop smarter.
 
----
-
-## Project Overview
-
-GroceryGo AI is designed with product quality inspired by Linear, Notion, and Stripe Dashboard:
-
-- Fast, clean, responsive app shell
-- Feature-first architecture for scale
-- Strong UX patterns for productivity (filters, sorting, quick actions, inline edits)
-- Polished dashboards and workflow-centric pages
-
-Current implementation includes:
-
-- Production-grade app shell (sidebar, navbar, theme toggle, user menu, mobile nav)
-- Dashboard with analytics, KPI cards, alerts, activity feed, and quick actions
-- Inventory management with CRUD-style modals, filters, sorting, pagination, and status badges
-- Receipt scanning experience with upload, preview, mock OCR pipeline, editable line items, and history panel
+> **Status:** 🚧 Under Active Development
 
 ---
 
-## Features
+# ✨ Features
 
-### Core Product
-
-- Dashboard insights for grocery operations
-- Inventory management with smart statuses:
-  - Expiry: Safe, Expiring Soon, Critical, Expired
-  - Stock: Healthy, Low, Out of Stock
-- Receipt scanner workflow with premium UX (no OCR engine integration yet)
-- Receipt history and detail review
-- Save scanned line items to inventory (mock flow)
-
-### UX & Platform
-
-- Responsive layout for desktop, tablet, and mobile
-- Light/Dark mode with persisted theme state
-- Reusable design system components (cards, buttons, modals, badges, inputs, tables)
-- Loading skeletons and empty states across major screens
-- Route-driven SPA architecture with nested layouts
-
----
-
-## Screenshots
-
-> Add your product screenshots in a `docs/screenshots` folder and update the paths below.
-
-### Dashboard
-
-![Dashboard]()
-
-### Inventory
-
-![Inventory]()
-
-### Receipt Scanner
-
-![Receipt Scanner](docs/screenshots/receipt-scanner.png)
-
----
-
-## Tech Stack
+## ✅ Implemented
 
 ### Frontend
+- Modern responsive UI built with React and TypeScript
+- Beautiful SaaS-inspired dashboard
+- Inventory management interface
+- Analytics dashboard
+- Receipt Scanner UI
+- Shopping List UI
+- Dark/Light theme support
+- Reusable UI components
+- Responsive design for desktop and mobile
+- Mock data integration for frontend development
+
+### Backend
+- Express.js REST API setup
+- PostgreSQL database integration
+- Prisma ORM integration
+- Inventory database schema
+- Database migrations
+- Centralized Prisma Client configuration
+- Scalable backend architecture (Route → Controller → Service)
+
+---
+
+# 🚀 Tech Stack
+
+## Frontend
 
 - React 19
-- React Router DOM 7
 - TypeScript
-- Vite 8
-- CSS Modules + design tokens
+- Vite
+- React Router
+- CSS Modules
+- Recharts
+- Zustand
+- Lucide React
 
-### State & Data
+## Backend
 
-- Zustand (UI state)
-- Mock feature hooks for async workflows
+- Node.js
+- Express.js
+- Prisma ORM
+- PostgreSQL
 
-### UI & Visualization
+## Development Tools
 
-- Lucide React (icons)
-- Recharts (analytics charts)
-- clsx (class composition)
-
-### Tooling
-
+- Git
+- GitHub
 - ESLint
-- Vite build pipeline
+- VS Code
 
 ---
 
-## Architecture
+# 🏗 Project Architecture
 
-Feature-sliced structure with reusable shared UI and route-level composition:
-
-```text
-src/
-├── app/                  # App bootstrap, providers, router
-├── routes/               # Route-level pages
-├── features/             # Domain modules (dashboard, inventory, receipt-scanner, ...)
-├── components/           # Shared UI/layout/data-display/feedback components
-├── stores/               # Global UI store(s)
-├── styles/               # Tokens + global styling
-└── types/                # Shared exported types
+```
+                Browser
+                   │
+                   ▼
+          React Frontend (Vite)
+                   │
+             HTTP REST API
+                   │
+                   ▼
+            Express Routes
+                   │
+                   ▼
+             Controllers
+                   │
+                   ▼
+               Services
+                   │
+                   ▼
+             Prisma Client
+                   │
+                   ▼
+             PostgreSQL Database
 ```
 
-High-level design principles:
+---
 
-- Feature-first modules for maintainability
-- Shared reusable components for consistent UX
-- Mocked data/hook boundaries ready for API integration
-- Route-based layout composition for scalable navigation
+# 📂 Project Structure
+
+```
+AI-Grocery-Go
+│
+├── backend
+│   ├── prisma
+│   │   ├── migrations
+│   │   └── schema.prisma
+│   │
+│   ├── src
+│   │   ├── config
+│   │   ├── controllers
+│   │   ├── middleware
+│   │   ├── routes
+│   │   ├── services
+│   │   ├── types
+│   │   ├── utils
+│   │   ├── app.ts
+│   │   └── server.ts
+│   │
+│   ├── .env
+│   ├── package.json
+│   └── tsconfig.json
+│
+├── src
+│   ├── app
+│   ├── routes
+│   ├── features
+│   ├── components
+│   ├── stores
+│   ├── styles
+│   └── types
+│
+└── README.md
+```
 
 ---
 
-## Installation Steps
+# 🗄 Database
 
-### 1) Clone repository
+The application currently contains one database model.
+
+## Inventory
+
+| Field | Type |
+|--------|------|
+| id | Int |
+| name | String |
+| category | String |
+| quantity | Int |
+| unit | String |
+| price | Float |
+| expiryDate | DateTime |
+| purchaseDate | DateTime |
+| createdAt | DateTime |
+| updatedAt | DateTime |
+
+---
+
+# 📸 Screenshots
+
+## Landing Page
+
+> *(Add screenshot here)*
+
+---
+
+## Dashboard
+
+> *(Add screenshot here)*
+
+---
+
+## Inventory
+
+> *(Add screenshot here)*
+
+---
+
+## Analytics
+
+> *(Add screenshot here)*
+
+---
+
+## Receipt Scanner
+
+> *(Add screenshot here)*
+
+---
+
+# ⚙ Installation
+
+## 1 Clone Repository
 
 ```bash
-git clone <your-repo-url>
-cd AI-Grocery-Go
+git clone https://github.com/Sheetal1613/GroceryGo-AI.git
 ```
 
-### 2) Install dependencies
+```
+cd GroceryGo-AI
+```
+
+---
+
+## 2 Install Frontend
 
 ```bash
 npm install
 ```
 
-### 3) Start development server
+---
+
+## 3 Install Backend
+
+```bash
+cd backend
+
+npm install
+```
+
+---
+
+## 4 Configure Environment Variables
+
+Create a `.env` file inside the `backend` folder.
+
+```
+PORT=5000
+
+DATABASE_URL="postgresql://postgres:YOUR_PASSWORD@localhost:5432/grocerygo?schema=public"
+
+GROQ_API_KEY=YOUR_GROQ_API_KEY
+```
+
+---
+
+## 5 Run Backend
+
+```bash
+cd backend
+
+npm run dev
+```
+
+Runs on
+
+```
+http://localhost:5000
+```
+
+---
+
+## 6 Run Frontend
 
 ```bash
 npm run dev
 ```
 
-App runs at:
+Runs on
 
-- [http://localhost:5173](http://localhost:5173)
-
-### 4) Production build
-
-```bash
-npm run build
 ```
-
-### 5) Preview production build
-
-```bash
-npm run preview
+http://localhost:5173
 ```
 
 ---
 
-## Future Roadmap
+# 📈 Current Progress
 
-### Product
+## Frontend
 
-- Real OCR integration (Tesseract.js or API provider)
-- AI-powered shopping recommendations and meal planning
-- Multi-household / workspace support
-- Budget goals and advanced analytics
-- Notifications and automations (expiry, low stock, spending anomalies)
+- ✅ Landing Page
+- ✅ Dashboard
+- ✅ Inventory UI
+- ✅ Shopping List UI
+- ✅ Receipt Scanner UI
+- ✅ Analytics Dashboard
+- ✅ Responsive Layout
+- ✅ Theme Support
 
-### Platform
+## Backend
 
-- Backend API + authentication integration
-- Real-time sync and cloud persistence
-- Test suite expansion (unit + integration + e2e)
-- Accessibility hardening and performance budgets
-- CI/CD and release workflows
-
----
-
-## Demo
-
-### Local Demo Routes
-
-- Landing: [http://localhost:5173/](http://localhost:5173/)
-- Dashboard: [http://localhost:5173/app/dashboard](http://localhost:5173/app/dashboard)
-- Inventory: [http://localhost:5173/app/inventory](http://localhost:5173/app/inventory)
-- Receipt Scanner: [http://localhost:5173/app/receipts](http://localhost:5173/app/receipts)
-
-### Hosted Demo
-
-- Web App: _Coming soon_
-- Product Walkthrough Video: _Coming soon_
+- ✅ Express Server
+- ✅ PostgreSQL Integration
+- ✅ Prisma ORM
+- ✅ Inventory Database Model
+- ✅ Database Migration
+- ✅ Prisma Client Configuration
 
 ---
 
-## License
+# 🚧 Upcoming Features
 
-This project is currently private and intended for active product development.
+- Inventory CRUD APIs
+- Shopping List CRUD APIs
+- User Authentication
+- JWT Authorization
+- Receipt OCR Integration
+- AI Shopping Assistant
+- Grocery Expense Prediction
+- Smart Expiry Notifications
+- Cloud Deployment
+- CI/CD Pipeline
+
+---
+
+# 🎯 Learning Objectives
+
+This project is being built to strengthen practical knowledge of:
+
+- Full-Stack Web Development
+- REST API Design
+- PostgreSQL Database Design
+- Prisma ORM
+- Express.js
+- React
+- TypeScript
+- Authentication
+- AI Integration
+- Software Architecture
+- Git & GitHub Workflow
+
+---
+
+# 📄 License
+
+This project is currently under active development for educational and portfolio purposes.
