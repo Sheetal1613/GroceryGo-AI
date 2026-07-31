@@ -1,11 +1,15 @@
-import express from 'express'
+import express from "express";
+import inventoryRoutes from "./routes/inventory.routes";
 
-const app = express()
+const app = express();
 
-app.use(express.json())
+app.use(express.json());
 
-app.get('/', (_req, res) => {
-  res.send('🚀 AI Grocery Go Backend is running...')
-})
+// Register Inventory Routes
+app.use("/api/inventory", inventoryRoutes);
 
-export default app
+app.get("/", (_req, res) => {
+  res.send("🚀 AI Grocery Go Backend is running...");
+});
+
+export default app;
