@@ -16,3 +16,11 @@ export const createInventoryItem = async (data: {
 
     return item;
 };
+
+export const getAllInventoryItems = async () => {
+    return await prisma.inventory.findMany({
+        orderBy: {
+            createdAt: "desc",
+        },
+    });
+};

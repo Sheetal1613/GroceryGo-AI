@@ -1,8 +1,12 @@
 import { Router } from "express";
-import { createInventory } from "../controllers/inventory.controller";
+import {
+    createInventory,
+    getInventory,
+} from "../controllers/inventory.controller";
 
 const router = Router();
 
 router.post("/", createInventory);
+router.get("/", getInventory);
 
 export default router;
