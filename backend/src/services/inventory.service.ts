@@ -24,3 +24,11 @@ export const getAllInventoryItems = async () => {
         },
     });
 };
+
+export const getInventoryItemById = async (id: number) => {
+    return await prisma.inventory.findUnique({
+        where: {
+            id,
+        },
+    });
+};
