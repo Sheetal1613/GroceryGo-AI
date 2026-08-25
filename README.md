@@ -150,37 +150,7 @@ The application currently contains one database model.
 
 ---
 
-# 📸 Screenshots
 
-## Landing Page
-
-> *(Add screenshot here)*
-
----
-
-## Dashboard
-
-> *(Add screenshot here)*
-
----
-
-## Inventory
-
-> *(Add screenshot here)*
-
----
-
-## Analytics
-
-> *(Add screenshot here)*
-
----
-
-## Receipt Scanner
-
-> *(Add screenshot here)*
-
----
 
 # ⚙ Installation
 
