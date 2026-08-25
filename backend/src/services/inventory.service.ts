@@ -32,3 +32,23 @@ export const getInventoryItemById = async (id: number) => {
         },
     });
 };
+
+export const updateInventoryItem = async (
+    id: number,
+    data: {
+        name?: string;
+        category?: string;
+        quantity?: number;
+        unit?: string;
+        price?: number;
+        purchaseDate?: Date;
+        expiryDate?: Date;
+    }
+) => {
+    return await prisma.inventory.update({
+        where: {
+            id,
+        },
+        data,
+    });
+};
