@@ -52,3 +52,11 @@ export const updateInventoryItem = async (
         data,
     });
 };
+
+export const deleteInventoryItem = async (id: number) => {
+    return await prisma.inventory.delete({
+        where: {
+            id,
+        },
+    });
+};

@@ -4,6 +4,7 @@ import {
     getAllInventoryItems,
     getInventoryItemById,
     updateInventoryItem,
+    deleteInventoryItem,
 } from "../services/inventory.service";
 
 export const createInventory = async (
@@ -80,6 +81,28 @@ export const updateInventory = async (
 
         res.status(500).json({
             message: "Failed to update inventory item",
+        });
+    }
+};
+
+export const deleteInventory = async (
+    req: Request,
+    res: Response
+) => {
+    try {
+        const id = Number(req.params.id);
+
+        const item = await deleteInventoryItem(id);
+
+        res.status(200).json({
+            message: "Inventory item deleted successfully",
+            item,
+        });
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            message: "Failed to delete inventory item",
         });
     }
 };
