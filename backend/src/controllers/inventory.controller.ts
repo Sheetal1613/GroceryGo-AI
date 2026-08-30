@@ -1,3 +1,4 @@
+import { inventorySchema, inventoryUpdateSchema } from "../validators/inventory.validator";
 import { Request, Response } from "express";
 import {
     createInventoryItem,
@@ -12,7 +13,16 @@ export const createInventory = async (
     res: Response
 ) => {
     try {
-        const item = await createInventoryItem(req.body);
+        const result = inventorySchema.safeParse(req.body);
+
+        if (!result.success) {
+            return res.status(400).json({
+                message: "Invalid inventory data",
+                errors: result.error.issues,
+            });
+        }
+
+        const item = await createInventoryItem(result.data);
 
         res.status(201).json(item);
     } catch (error) {
@@ -73,7 +83,16 @@ export const updateInventory = async (
     try {
         const id = Number(req.params.id);
 
-        const item = await updateInventoryItem(id, req.body);
+        const result = inventoryUpdateSchema.safeParse(req.body);
+
+        if (!result.success) {
+            return res.status(400).json({
+                message: "Invalid inventory update data",
+                errors: result.error.issues,
+            });
+        }
+
+        const item = await updateInventoryItem(id, result.data);
 
         res.status(200).json(item);
     } catch (error) {
