@@ -52,6 +52,7 @@ function SortIcon({
   if (sortField !== field) {
     return <ArrowUpDown size={14} className={styles.sortIdle} aria-hidden />
   }
+
   return sortDirection === 'asc' ? (
     <ArrowUp size={14} aria-hidden />
   ) : (
@@ -82,17 +83,25 @@ export function InventoryTable({
           <table className={styles.table}>
             <thead>
               <tr>
-                {['Product', 'Category', 'Quantity', 'Purchased', 'Expires', 'Status', ''].map(
-                  (h) => (
-                    <th key={h}>{h}</th>
-                  ),
-                )}
+                {[
+                  'Product',
+                  'Category',
+                  'Quantity',
+                  'Price',
+                  'Purchased',
+                  'Expires',
+                  'Status',
+                  '',
+                ].map((h) => (
+                  <th key={h}>{h}</th>
+                ))}
               </tr>
             </thead>
+
             <tbody>
               {Array.from({ length: 8 }).map((_, i) => (
                 <tr key={i}>
-                  {Array.from({ length: 7 }).map((__, j) => (
+                  {Array.from({ length: 8 }).map((__, j) => (
                     <td key={j}>
                       <Skeleton />
                     </td>
@@ -151,7 +160,9 @@ export function InventoryTable({
                   />
                 </button>
               </th>
+
               <th>Category</th>
+
               <th>
                 <button
                   type="button"
@@ -166,7 +177,11 @@ export function InventoryTable({
                   />
                 </button>
               </th>
+
+              <th>Price</th>
+
               <th className={styles.hideMobile}>Purchased</th>
+
               <th>
                 <button
                   type="button"
@@ -181,21 +196,26 @@ export function InventoryTable({
                   />
                 </button>
               </th>
+
               <th>Status</th>
+
               <th className={styles.actionsCol}>
                 <span className="sr-only">Actions</span>
               </th>
             </tr>
           </thead>
+
           <tbody>
             {items.map((item) => (
               <tr key={item.id}>
                 <td>
                   <span className={styles.productName}>{item.name}</span>
                 </td>
+
                 <td>
                   <span className={styles.category}>{item.category}</span>
                 </td>
+
                 <td>
                   <QuantityIndicator
                     quantity={item.quantity}
@@ -203,16 +223,22 @@ export function InventoryTable({
                     stockStatus={item.stockStatus}
                   />
                 </td>
+
+                <td>₹{item.price}</td>
+
                 <td className={styles.hideMobile}>
                   {formatDisplayDate(item.purchaseDate)}
                 </td>
+
                 <td>{formatDisplayDate(item.expiryDate)}</td>
+
                 <td>
                   <div className={styles.statusCell}>
                     <ExpiryBadge status={item.expiryStatus} />
                     <StockBadge status={item.stockStatus} />
                   </div>
                 </td>
+
                 <td className={styles.actionsCol}>
                   <div className={styles.actions}>
                     <button
@@ -223,6 +249,7 @@ export function InventoryTable({
                     >
                       <Pencil size={16} aria-hidden />
                     </button>
+
                     <button
                       type="button"
                       className={cn(styles.actionBtn, styles.deleteBtn)}
@@ -244,6 +271,7 @@ export function InventoryTable({
           <article key={item.id} className={styles.mobileCard}>
             <div className={styles.mobileHeader}>
               <h3 className={styles.productName}>{item.name}</h3>
+
               <div className={styles.actions}>
                 <button
                   type="button"
@@ -253,6 +281,7 @@ export function InventoryTable({
                 >
                   <Pencil size={16} aria-hidden />
                 </button>
+
                 <button
                   type="button"
                   className={cn(styles.actionBtn, styles.deleteBtn)}
@@ -263,22 +292,32 @@ export function InventoryTable({
                 </button>
               </div>
             </div>
+
             <p className={styles.category}>{item.category}</p>
+
             <QuantityIndicator
               quantity={item.quantity}
               unit={item.unit}
               stockStatus={item.stockStatus}
             />
+
             <dl className={styles.mobileMeta}>
+              <div>
+                <dt>Price</dt>
+                <dd>₹{item.price}</dd>
+              </div>
+
               <div>
                 <dt>Purchased</dt>
                 <dd>{formatDisplayDate(item.purchaseDate)}</dd>
               </div>
+
               <div>
                 <dt>Expires</dt>
                 <dd>{formatDisplayDate(item.expiryDate)}</dd>
               </div>
             </dl>
+
             <div className={styles.statusCell}>
               <ExpiryBadge status={item.expiryStatus} />
               <StockBadge status={item.stockStatus} />

@@ -21,6 +21,7 @@ export type InventoryItem = {
   category: InventoryCategory
   quantity: number
   unit: string
+  price: number
   lowStockThreshold: number
   purchaseDate: string
   expiryDate: string | null
@@ -50,6 +51,7 @@ export type InventoryFormData = {
   category: InventoryCategory
   quantity: number
   unit: string
+  price: number
   lowStockThreshold: number
   purchaseDate: string
   expiryDate: string

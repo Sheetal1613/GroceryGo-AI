@@ -46,6 +46,7 @@ function emptyForm(): InventoryFormData {
     category: 'Produce',
     quantity: 1,
     unit: 'units',
+    price: 0,
     lowStockThreshold: 2,
     purchaseDate: todayIso(),
     expiryDate: '',
@@ -58,6 +59,7 @@ function itemToForm(item: InventoryItem): InventoryFormData {
     category: item.category,
     quantity: item.quantity,
     unit: item.unit,
+    price: item.price,
     lowStockThreshold: item.lowStockThreshold,
     purchaseDate: item.purchaseDate,
     expiryDate: item.expiryDate ?? '',
@@ -167,28 +169,44 @@ export function ItemFormDialog({
             onChange={(e) => update('unit', e.target.value)}
           />
         </div>
+
         <div className={styles.row}>
-          <Input
-            label="Quantity"
-            type="number"
-            min={0}
-            step={1}
-            value={String(form.quantity)}
-            onChange={(e) => update('quantity', Number(e.target.value))}
-            error={errors.quantity}
-          />
-          <Input
-            label="Low Stock Threshold"
-            type="number"
-            min={0}
-            step={1}
-            value={String(form.lowStockThreshold)}
-            onChange={(e) =>
-              update('lowStockThreshold', Number(e.target.value))
-            }
-            error={errors.lowStockThreshold}
-          />
-        </div>
+  <Input
+    label="Quantity"
+    type="number"
+    min={0}
+    step={1}
+    value={String(form.quantity)}
+    onChange={(e) => update('quantity', Number(e.target.value))}
+    error={errors.quantity}
+  />
+
+  <Input
+    label="Price"
+    type="number"
+    min={0}
+    step={0.01}
+    value={String(form.price)}
+    onChange={(e) => update('price', Number(e.target.value))}
+    error={errors.price}
+  />
+</div>
+
+<div className={styles.row}>
+  <Input
+    label="Low Stock Threshold"
+    type="number"
+    min={0}
+    step={1}
+    value={String(form.lowStockThreshold)}
+    onChange={(e) =>
+      update('lowStockThreshold', Number(e.target.value))
+    }
+    error={errors.lowStockThreshold}
+  />
+</div>
+
+        
         <div className={styles.row}>
           <Input
             label="Purchase Date"

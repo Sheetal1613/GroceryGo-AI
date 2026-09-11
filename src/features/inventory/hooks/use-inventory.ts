@@ -1,24 +1,23 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { MOCK_INVENTORY_ITEMS } from '../data/mock-inventory'
 import {
-  enrichItems,
-  generateId,
-  sortItems,
-} from '../lib/inventory-utils'
+  getInventoryItems,
+  createInventoryItem,
+  updateInventoryItem,
+  deleteInventoryItem,
+} from '../api/inventory-api'
+import { enrichItems, sortItems } from '../lib/inventory-utils'
 import type {
   CategoryFilter,
   ExpiryFilter,
   InventoryFilters,
   InventoryFormData,
   InventoryItem,
-  InventoryItemWithStatus,
   ModalMode,
   SortDirection,
   SortField,
   StockFilter,
 } from '../types'
 
-const LOAD_DELAY_MS = 700
 const DEFAULT_PAGE_SIZE = 10
 
 type UseInventoryOptions = {
@@ -46,18 +45,33 @@ export function useInventory(options: UseInventoryOptions = {}) {
 
   useEffect(() => {
     let cancelled = false
-    setIsLoading(true)
-    setError(null)
 
-    const timer = window.setTimeout(() => {
-      if (cancelled) return
-      setItems(simulateEmpty ? [] : [...MOCK_INVENTORY_ITEMS])
-      setIsLoading(false)
-    }, LOAD_DELAY_MS)
+    async function loadInventory() {
+      try {
+        setIsLoading(true)
+        setError(null)
+
+        const data = await getInventoryItems()
+
+        if (!cancelled) {
+          setItems(simulateEmpty ? [] : data)
+        }
+      } catch (error) {
+        if (!cancelled) {
+          setError('Failed to load inventory')
+          console.error(error)
+        }
+      } finally {
+        if (!cancelled) {
+          setIsLoading(false)
+        }
+      }
+    }
+
+    loadInventory()
 
     return () => {
       cancelled = true
-      window.clearTimeout(timer)
     }
   }, [simulateEmpty])
 
@@ -65,11 +79,13 @@ export function useInventory(options: UseInventoryOptions = {}) {
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase()
+
     return enriched.filter((item) => {
       if (q && !item.name.toLowerCase().includes(q)) return false
       if (category !== 'all' && item.category !== category) return false
       if (expiry !== 'all' && item.expiryStatus !== expiry) return false
       if (stock !== 'all' && item.stockStatus !== stock) return false
+
       return true
     })
   }, [enriched, search, category, expiry, stock])
@@ -85,11 +101,14 @@ export function useInventory(options: UseInventoryOptions = {}) {
   const paginatedItems = useMemo(() => {
     const safePage = Math.min(page, totalPages)
     const start = (safePage - 1) * pageSize
+
     return sorted.slice(start, start + pageSize)
   }, [sorted, page, pageSize, totalPages])
 
   useEffect(() => {
-    if (page > totalPages) setPage(totalPages)
+    if (page > totalPages) {
+      setPage(totalPages)
+    }
   }, [page, totalPages])
 
   const resetPage = useCallback(() => setPage(1), [])
@@ -120,9 +139,11 @@ export function useInventory(options: UseInventoryOptions = {}) {
         setSortDirection((d) => (d === 'asc' ? 'desc' : 'asc'))
         return prev
       }
+
       setSortDirection('asc')
       return field
     })
+
     setPage(1)
   }, [])
 
@@ -146,52 +167,82 @@ export function useInventory(options: UseInventoryOptions = {}) {
     setSelectedItem(null)
   }, [])
 
-  const addItem = useCallback((data: InventoryFormData) => {
-    const newItem: InventoryItem = {
-      id: generateId(),
-      name: data.name.trim(),
-      category: data.category,
-      quantity: data.quantity,
-      unit: data.unit.trim(),
-      lowStockThreshold: data.lowStockThreshold,
-      purchaseDate: data.purchaseDate,
-      expiryDate: data.expiryDate || null,
-    }
-    setItems((prev) => [newItem, ...prev])
-    closeModal()
-    setPage(1)
-  }, [closeModal])
+  const addItem = useCallback(
+    async (data: InventoryFormData) => {
+      try {
+        setError(null)
+
+        const newItem = await createInventoryItem({
+          name: data.name.trim(),
+          category: data.category,
+          quantity: data.quantity,
+          unit: data.unit.trim(),
+          price: data.price,
+          lowStockThreshold: data.lowStockThreshold,
+          purchaseDate: data.purchaseDate,
+          expiryDate: data.expiryDate || null,
+        })
+
+        setItems((prev) => [newItem, ...prev])
+
+        closeModal()
+        setPage(1)
+      } catch (error) {
+        console.error(error)
+        setError('Failed to add inventory item')
+      }
+    },
+    [closeModal],
+  )
 
   const updateItem = useCallback(
-    (id: string, data: InventoryFormData) => {
-      setItems((prev) =>
-        prev.map((item) =>
-          item.id === id
-            ? {
-                ...item,
-                name: data.name.trim(),
-                category: data.category,
-                quantity: data.quantity,
-                unit: data.unit.trim(),
-                lowStockThreshold: data.lowStockThreshold,
-                purchaseDate: data.purchaseDate,
-                expiryDate: data.expiryDate || null,
-              }
-            : item,
-        ),
-      )
-      closeModal()
+    async (id: string, data: InventoryFormData) => {
+      try {
+        setError(null)
+
+        const updatedItem = await updateInventoryItem(id, {
+          name: data.name.trim(),
+          category: data.category,
+          quantity: data.quantity,
+          unit: data.unit.trim(),
+          price: data.price,
+          lowStockThreshold: data.lowStockThreshold,
+          purchaseDate: data.purchaseDate,
+          expiryDate: data.expiryDate || null,
+        })
+
+        setItems((prev) =>
+          prev.map((item) =>
+            item.id === id ? updatedItem : item,
+          ),
+        )
+
+        closeModal()
+      } catch (error) {
+        console.error(error)
+        setError('Failed to update inventory item')
+      }
     },
     [closeModal],
   )
 
-  const deleteItem = useCallback(
-    (id: string) => {
+ const deleteItem = useCallback(
+  async (id: string) => {
+    try {
+      setError(null)
+
+      await deleteInventoryItem(id)
+
       setItems((prev) => prev.filter((item) => item.id !== id))
+
       closeModal()
-    },
-    [closeModal],
-  )
+    } catch (error) {
+      console.error(error)
+      setError('Failed to delete inventory item')
+    }
+  },
+  [closeModal],
+)
 
   const clearFilters = useCallback(() => {
     setSearch('')
@@ -201,7 +252,13 @@ export function useInventory(options: UseInventoryOptions = {}) {
     setPage(1)
   }, [])
 
-  const filters: InventoryFilters = { search, category, expiry, stock }
+  const filters: InventoryFilters = {
+    search,
+    category,
+    expiry,
+    stock,
+  }
+
   const hasActiveFilters =
     search.trim() !== '' ||
     category !== 'all' ||
@@ -210,12 +267,15 @@ export function useInventory(options: UseInventoryOptions = {}) {
 
   const stats = useMemo(() => {
     const all = enrichItems(items)
+
     return {
       total: all.length,
       lowStock: all.filter((i) => i.stockStatus === 'low').length,
       outOfStock: all.filter((i) => i.stockStatus === 'out').length,
       expiringSoon: all.filter(
-        (i) => i.expiryStatus === 'expiring_soon' || i.expiryStatus === 'critical',
+        (i) =>
+          i.expiryStatus === 'expiring_soon' ||
+          i.expiryStatus === 'critical',
       ).length,
     }
   }, [items])
