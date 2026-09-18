@@ -6,13 +6,14 @@ import {
     updateInventory,
     deleteInventory,
 } from "../controllers/inventory.controller";
+import { authenticateToken } from "../middleware/auth.middleware";
 
 const router = Router();
 
-router.post("/", createInventory);
-router.get("/", getInventory);
-router.get("/:id", getInventoryItem);
-router.put("/:id", updateInventory);
-router.delete("/:id", deleteInventory);
+router.post("/", authenticateToken, createInventory);
+router.get("/", authenticateToken, getInventory);
+router.get("/:id", authenticateToken, getInventoryItem);
+router.put("/:id", authenticateToken, updateInventory);
+router.delete("/:id", authenticateToken, deleteInventory);
 
 export default router;

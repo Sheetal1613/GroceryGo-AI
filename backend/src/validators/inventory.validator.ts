@@ -11,9 +11,11 @@ export const inventorySchema = z.object({
 
     price: z.number().nonnegative("Price cannot be negative"),
 
+    lowStockThreshold: z.number().nonnegative("Threshold cannot be negative"),
+
     purchaseDate: z.coerce.date(),
 
-    expiryDate: z.coerce.date().optional(),
+    expiryDate: z.coerce.date().nullable().optional(),
 });
 
 export const inventoryUpdateSchema = z.object({
@@ -27,7 +29,9 @@ export const inventoryUpdateSchema = z.object({
 
     price: z.number().nonnegative("Price cannot be negative").optional(),
 
+    lowStockThreshold: z.number().nonnegative("Threshold cannot be negative").optional(),
+
     purchaseDate: z.coerce.date().optional(),
 
-    expiryDate: z.coerce.date().optional(),
+    expiryDate: z.coerce.date().nullable().optional(),
 });

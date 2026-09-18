@@ -1,5 +1,4 @@
-import { inventorySchema, inventoryUpdateSchema } from "../validators/inventory.validator";
-import { Request, Response } from "express";
+import { Response } from "express";
 import {
     createInventoryItem,
     getAllInventoryItems,
@@ -7,12 +6,23 @@ import {
     updateInventoryItem,
     deleteInventoryItem,
 } from "../services/inventory.service";
+import {
+    inventorySchema,
+    inventoryUpdateSchema,
+} from "../validators/inventory.validator";
+import { AuthRequest } from "../middleware/auth.middleware";
 
 export const createInventory = async (
-    req: Request,
+    req: AuthRequest,
     res: Response
 ) => {
     try {
+        if (!req.userId) {
+            return res.status(401).json({
+                message: "Unauthorized",
+            });
+        }
+
         const result = inventorySchema.safeParse(req.body);
 
         if (!result.success) {
@@ -22,43 +32,61 @@ export const createInventory = async (
             });
         }
 
-        const item = await createInventoryItem(result.data);
+        const item = await createInventoryItem(
+            req.userId,
+            result.data
+        );
 
-        res.status(201).json(item);
+        return res.status(201).json(item);
     } catch (error) {
         console.error(error);
 
-        res.status(500).json({
+        return res.status(500).json({
             message: "Failed to create inventory item",
         });
     }
 };
 
 export const getInventory = async (
-    _req: Request,
+    req: AuthRequest,
     res: Response
 ) => {
     try {
-        const items = await getAllInventoryItems();
+        if (!req.userId) {
+            return res.status(401).json({
+                message: "Unauthorized",
+            });
+        }
 
-        res.status(200).json(items);
+        const items = await getAllInventoryItems(req.userId);
+
+        return res.status(200).json(items);
     } catch (error) {
         console.error(error);
 
-        res.status(500).json({
+        return res.status(500).json({
             message: "Failed to fetch inventory items",
         });
     }
 };
 
 export const getInventoryItem = async (
-    req: Request,
+    req: AuthRequest,
     res: Response
 ) => {
     try {
+        if (!req.userId) {
+            return res.status(401).json({
+                message: "Unauthorized",
+            });
+        }
+
         const id = Number(req.params.id);
 
-        const item = await getInventoryItemById(id);
+        const item = await getInventoryItemById(
+            req.userId,
+            id
+        );
 
         if (!item) {
             return res.status(404).json({
@@ -66,21 +94,27 @@ export const getInventoryItem = async (
             });
         }
 
-        res.status(200).json(item);
+        return res.status(200).json(item);
     } catch (error) {
         console.error(error);
 
-        res.status(500).json({
+        return res.status(500).json({
             message: "Failed to fetch inventory item",
         });
     }
 };
 
 export const updateInventory = async (
-    req: Request,
+    req: AuthRequest,
     res: Response
 ) => {
     try {
+        if (!req.userId) {
+            return res.status(401).json({
+                message: "Unauthorized",
+            });
+        }
+
         const id = Number(req.params.id);
 
         const result = inventoryUpdateSchema.safeParse(req.body);
@@ -92,35 +126,64 @@ export const updateInventory = async (
             });
         }
 
-        const item = await updateInventoryItem(id, result.data);
+        const resultUpdate = await updateInventoryItem(
+            req.userId,
+            id,
+            result.data
+        );
 
-        res.status(200).json(item);
+        if (resultUpdate.count === 0) {
+            return res.status(404).json({
+                message: "Inventory item not found",
+            });
+        }
+
+        const updatedItem = await getInventoryItemById(
+            req.userId,
+            id
+        );
+
+        return res.status(200).json(updatedItem);
     } catch (error) {
         console.error(error);
 
-        res.status(500).json({
+        return res.status(500).json({
             message: "Failed to update inventory item",
         });
     }
 };
 
 export const deleteInventory = async (
-    req: Request,
+    req: AuthRequest,
     res: Response
 ) => {
     try {
+        if (!req.userId) {
+            return res.status(401).json({
+                message: "Unauthorized",
+            });
+        }
+
         const id = Number(req.params.id);
 
-        const item = await deleteInventoryItem(id);
+        const result = await deleteInventoryItem(
+            req.userId,
+            id
+        );
 
-        res.status(200).json({
+        if (result.count === 0) {
+            return res.status(404).json({
+                message: "Inventory item not found",
+            });
+        }
+
+        return res.status(200).json({
             message: "Inventory item deleted successfully",
-            item,
         });
     } catch (error) {
         console.error(error);
 
-        res.status(500).json({
+        return res.status(500).json({
             message: "Failed to delete inventory item",
         });
     }
