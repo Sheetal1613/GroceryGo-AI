@@ -1,9 +1,20 @@
+import { getAuthToken } from '@/hooks/use-auth'
 import type { InventoryItem } from '../types'
 
 const API_URL = 'http://localhost:5000/api/inventory'
 
+function getAuthHeaders() {
+  const token = getAuthToken()
+
+  return {
+    Authorization: `Bearer ${token}`,
+  }
+}
+
 export async function getInventoryItems(): Promise<InventoryItem[]> {
-  const response = await fetch(API_URL)
+  const response = await fetch(API_URL, {
+    headers: getAuthHeaders(),
+  })
 
   if (!response.ok) {
     throw new Error('Failed to fetch inventory items')
@@ -19,6 +30,7 @@ export async function createInventoryItem(
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      ...getAuthHeaders(),
     },
     body: JSON.stringify(data),
   })
@@ -38,6 +50,7 @@ export async function updateInventoryItem(
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      ...getAuthHeaders(),
     },
     body: JSON.stringify(data),
   })
@@ -52,6 +65,7 @@ export async function updateInventoryItem(
 export async function deleteInventoryItem(id: string): Promise<void> {
   const response = await fetch(`${API_URL}/${id}`, {
     method: 'DELETE',
+    headers: getAuthHeaders(),
   })
 
   if (!response.ok) {
