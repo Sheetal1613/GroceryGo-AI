@@ -121,6 +121,52 @@ export const getDashboardData = async (userId: number) => {
         value,
     }));
 
+    // -----------------------------
+    // Spending history
+    // Last 6 months including current month
+    // -----------------------------
+
+    const spendingHistory: {
+        month: string;
+        amount: number;
+    }[] = [];
+
+    for (let i = 5; i >= 0; i--) {
+        const monthDate = new Date(
+            today.getFullYear(),
+            today.getMonth() - i,
+            1
+        );
+
+        const nextMonthDate = new Date(
+            today.getFullYear(),
+            today.getMonth() - i + 1,
+            1
+        );
+
+        const amount = inventory
+            .filter((item) => {
+                return (
+                    item.purchaseDate >= monthDate &&
+                    item.purchaseDate < nextMonthDate
+                );
+            })
+            .reduce((total, item) => {
+                return total + item.price;
+            }, 0);
+
+        spendingHistory.push({
+            month: monthDate.toLocaleString("en-US", {
+                month: "short",
+            }),
+            amount,
+        });
+    }
+
+    // -----------------------------
+    // Dashboard response
+    // -----------------------------
+
     return {
         totalInventoryItems,
         expiringSoonCount: expiringSoonItems.length,
@@ -129,5 +175,6 @@ export const getDashboardData = async (userId: number) => {
         lowStockCount: lowStockItems.length,
         outOfStockCount: outOfStockItems.length,
         categorySpending,
+        spendingHistory,
     };
 };

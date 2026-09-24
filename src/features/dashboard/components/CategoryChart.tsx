@@ -75,7 +75,7 @@ export function CategoryChart({ data, loading = false }: CategoryChartProps) {
                   borderRadius: '8px',
                   fontSize: '13px',
                 }}
-                formatter={(value) => [`${Number(value)}%`, 'Share']}
+                formatter={(value) => [`${Number(value)}%`, 'Share of spending']}
               />
             </PieChart>
           </ResponsiveContainer>

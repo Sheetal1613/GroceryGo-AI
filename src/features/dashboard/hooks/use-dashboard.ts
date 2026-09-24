@@ -2,6 +2,17 @@ import { useCallback, useEffect, useState } from 'react'
 import { getDashboardData } from '../api/dashboard-api'
 import type { DashboardData } from '../types'
 
+const CATEGORY_COLORS: Record<string, string> = {
+  'Produce': '#22C55E',
+  'Dairy & Eggs': '#3B82F6',
+  'Meat & Seafood': '#EF4444',
+  'Pantry': '#F59E0B',
+  'Frozen': '#8B5CF6',
+  'Beverages': '#06B6D4',
+  'Bakery': '#D97706',
+  'Snacks': '#EC4899',
+}
+
 type UseDashboardOptions = {
   /** Simulate empty lists (activities, charts, low stock) */
   simulateEmpty?: boolean
@@ -56,17 +67,20 @@ export function useDashboard(
             iconTone: 'success',
           },
         ],
-        spending: [],
+        spending: result.spendingHistory.map((item) => ({
+        month: item.month,
+        amount: item.amount,
+       })),
        categories: result.categorySpending.map((category) => ({
   name: category.name,
- value:
+  value:
   result.monthlySpending > 0
     ? Number(
         ((category.value / result.monthlySpending) * 100).toFixed(1),
       )
     : 0,
-  color: '',
-})),
+ color: CATEGORY_COLORS[category.name] ?? '#64748B',
+ })),
         activities: [],
         lowStock: result.lowStockItems.map((item) => ({
           id: String(item.id),

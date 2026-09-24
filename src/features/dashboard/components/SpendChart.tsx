@@ -2,7 +2,6 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
-  Legend,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -21,7 +20,7 @@ type SpendChartProps = {
 }
 
 function formatCurrency(value: number) {
-  return `$${value.toLocaleString()}`
+  return `₹${value.toLocaleString('en-IN')}`
 }
 
 export function SpendChart({ data, loading = false }: SpendChartProps) {
@@ -39,13 +38,13 @@ export function SpendChart({ data, loading = false }: SpendChartProps) {
       <Card className={styles.chartCard}>
         <CardHeader
           title="Monthly Spending"
-          description="Track spending against your budget"
+          description="Your grocery spending over the last 6 months"
         />
         <EmptyState
           compact
           icon={BarChart3}
           title="No spending data yet"
-          description="Scan a receipt or add purchases to see your spending trends."
+          description="Add purchases to see your spending trends."
         />
       </Card>
     )
@@ -55,28 +54,41 @@ export function SpendChart({ data, loading = false }: SpendChartProps) {
     <Card className={styles.chartCard}>
       <CardHeader
         title="Monthly Spending"
-        description="Actual spend vs. $1,300 monthly budget"
+        description="Your grocery spending over the last 6 months"
       />
+
       <div className={styles.chartWrap}>
         <ResponsiveContainer width="100%" height={280}>
-          <BarChart data={data} margin={{ top: 8, right: 8, left: -8, bottom: 0 }}>
+          <BarChart
+            data={data}
+            margin={{ top: 8, right: 8, left: -8, bottom: 0 }}
+          >
             <CartesianGrid
               strokeDasharray="3 3"
               stroke="var(--gg-border)"
               vertical={false}
             />
+
             <XAxis
               dataKey="month"
-              tick={{ fill: 'var(--gg-text-tertiary)', fontSize: 12 }}
+              tick={{
+                fill: 'var(--gg-text-tertiary)',
+                fontSize: 12,
+              }}
               axisLine={{ stroke: 'var(--gg-border)' }}
               tickLine={false}
             />
+
             <YAxis
-              tick={{ fill: 'var(--gg-text-tertiary)', fontSize: 12 }}
+              tick={{
+                fill: 'var(--gg-text-tertiary)',
+                fontSize: 12,
+              }}
               axisLine={false}
               tickLine={false}
-              tickFormatter={(v) => `$${v}`}
+              tickFormatter={(value) => `₹${value}`}
             />
+
             <Tooltip
               contentStyle={{
                 background: 'var(--gg-bg-elevated)',
@@ -84,26 +96,19 @@ export function SpendChart({ data, loading = false }: SpendChartProps) {
                 borderRadius: '8px',
                 fontSize: '13px',
               }}
-              labelStyle={{ color: 'var(--gg-text-primary)', fontWeight: 600 }}
-              formatter={(value, name) => [
+              labelStyle={{
+                color: 'var(--gg-text-primary)',
+                fontWeight: 600,
+              }}
+              formatter={(value) => [
                 formatCurrency(Number(value)),
-                name === 'amount' ? 'Spent' : 'Budget',
+                'Spent',
               ]}
             />
-            <Legend
-              wrapperStyle={{ fontSize: '12px', paddingTop: '12px' }}
-              formatter={(value) =>
-                value === 'amount' ? 'Spent' : 'Budget'
-              }
-            />
-            <Bar
-              dataKey="budget"
-              fill="var(--gg-border)"
-              radius={[4, 4, 0, 0]}
-              maxBarSize={32}
-            />
+
             <Bar
               dataKey="amount"
+              name="Spent"
               fill="var(--gg-accent)"
               radius={[4, 4, 0, 0]}
               maxBarSize={32}

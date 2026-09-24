@@ -13,7 +13,6 @@ export type KpiMetric = {
 export type SpendingDataPoint = {
   month: string
   amount: number
-  budget: number
 }
 
 export type CategorySlice = {

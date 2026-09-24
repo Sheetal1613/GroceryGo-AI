@@ -14,6 +14,7 @@ export type DashboardApiResponse = {
   totalInventoryItems: number
   expiringSoonCount: number
   monthlySpending: number
+
   lowStockItems: {
     id: number
     name: string
@@ -25,11 +26,18 @@ export type DashboardApiResponse = {
     expiryDate: string | null
     purchaseDate: string
   }[]
+
   lowStockCount: number
   outOfStockCount: number
+
   categorySpending: {
     name: string
     value: number
+  }[]
+
+  spendingHistory: {
+    month: string
+    amount: number
   }[]
 }
 
